@@ -47,7 +47,7 @@ public class PercentSplitStrategy implements SplitStrategy {
             split.put(participants.get(i), share);
         }
 
-        // Rounding down can leave a few paise unassigned; give them to the first participant
+        // Rounding down can leave a few money unassigned; give them to the first participant
         BigDecimal leftover = total.subtract(assigned);
         if (leftover.signum() > 0) {
             User first = participants.get(0);

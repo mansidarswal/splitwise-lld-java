@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-/** Plain-Java checks (no framework needed). Run this file's main(). */
+
 public class SelfTest {
 
     private static int passed = 0;

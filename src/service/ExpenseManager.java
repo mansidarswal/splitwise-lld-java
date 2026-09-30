@@ -23,7 +23,7 @@ public class ExpenseManager {
     private final Map<Integer, Group> groups = new LinkedHashMap<>();
 
     // balances.get(debtor).get(creditor) = amount debtor owes creditor.
-    // Only ONE direction is ever stored per pair (debts are netted).
+
     private final Map<User, Map<User, BigDecimal>> balances = new LinkedHashMap<>();
 
     // ---------- users ----------
@@ -88,7 +88,7 @@ public class ExpenseManager {
                         "All participants must be members of " + group.getName() + ".");
             }
         }
-        // Membership is verified first, so a rejected expense never changes any balance
+
         Expense expense = addExpense(description, amount, paidBy, participants, strategy, values);
         group.addExpense(expense);
         return expense;
@@ -146,14 +146,14 @@ public class ExpenseManager {
 
     // ---------- balances ----------
 
-    // How much "debtor" currently owes "creditor" (0.00 if nothing)
+    // How much "debtor" currently owes "creditor"
     public BigDecimal getAmountOwed(User debtor, User creditor) {
         Map<User, BigDecimal> map = balances.get(debtor);
         if (map == null) return ZERO;
         return map.getOrDefault(creditor, ZERO);
     }
 
-    // Pure logic: returns the lines, prints nothing
+
     public List<String> getBalanceStatements() {
         List<String> lines = new ArrayList<>();
         for (Map.Entry<User, Map<User, BigDecimal>> debtorEntry : balances.entrySet()) {
@@ -165,7 +165,7 @@ public class ExpenseManager {
         return lines;
     }
 
-    // Thin wrapper for console output
+   //wrapper
     public void showBalances() {
         List<String> lines = getBalanceStatements();
         if (lines.isEmpty()) {
@@ -217,7 +217,7 @@ public class ExpenseManager {
         setDebt(debtor, creditor, getAmountOwed(debtor, creditor).add(amount));
     }
 
-    // Set the debt; zero amounts are removed so the map stays clean
+    // Set the debt
     private void setDebt(User debtor, User creditor, BigDecimal amount) {
         if (amount.signum() == 0) {
             balances.get(debtor).remove(creditor);

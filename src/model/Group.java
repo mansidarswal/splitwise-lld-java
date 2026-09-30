@@ -29,7 +29,7 @@ public class Group {
         return name;
     }
 
-    // Read-only views: outside code must use the add/remove methods
+
     public List<User> getMembers() {
         return Collections.unmodifiableList(members);
     }
